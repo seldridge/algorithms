@@ -20,10 +20,10 @@ vpath %.c $(DIR_SRC)/test/c
 all: $(OBJECTS) $(TARGETS)
 
 $(DIR_BUILD)/%-c.o: %.c
-	$(GCC) -I $(DIR_SRC)/main/c $< -c -o $@
+	$(GCC) -O2 -I $(DIR_SRC)/main/c $< -c -o $@
 
 $(DIR_BUILD)/%-c: %.c $(OBJECTS)
-	$(GCC) -I $(DIR_SRC)/main/c $< $(OBJECTS) -o $@
+	$(GCC) -O2 -I $(DIR_SRC)/main/c $< $(OBJECTS) -o $@
 
 clean:
 	rm -rf $(DIR_BUILD)/*
