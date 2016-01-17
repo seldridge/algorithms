@@ -26,6 +26,11 @@ void array_swap(array * A, int a, int b) {
   A->data[b] = tmp;
 }
 
+void array_set(array * A, uint32_t val) {
+  for (int i = 0; i < A->size; i++)
+    A->data[i] = val;
+}
+
 void array_randomize(array * A) {
   for (int i = 0; i < A->size; i++) {
     A->data[i] = rand() % 100;
@@ -39,6 +44,39 @@ void array_sort_insertion(array * A) {
       array_swap(A, j, j+1);
       j--;
     }
+  }
+}
+
+void array_copy(array * A, array * B, int start_A, int start_B, int num) {
+  for (int i = 0; i < num; i++)
+    B->data[start_B + i] = A->data[start_A + i];
+}
+
+int array_merge(array *A, array * B, array * C, int l) {
+  int b = 0, c = 0, i = l;
+  while (B->data[b] != (uint32_t) ((int32_t) -1) ||
+         C->data[c] != (uint32_t) ((int32_t) -1)) {
+    if (B->data[b] < C->data[c])
+      A->data[i++] = B->data[b++];
+    else
+      A->data[i++] = C->data[c++];
+  }
+
+}
+
+int array_sort_mergesort(array *A, array * B, array * C, int l, int r) {
+  if (r - l > 0) {
+    int mid = l + (r - l) / 2;
+    array_sort_mergesort(A, B, C, l, mid);
+    array_sort_mergesort(A, B, C, mid + 1, r);
+
+    array_copy(A, B, l, 0, mid - l + 1);
+    array_copy(A, C, mid + 1, 0, r - (mid + 1) + 1);
+
+    B->data[mid - l + 1] = (uint32_t) ((int32_t) -1);
+    C->data[r - (mid + 1) + 1] = (uint32_t) ((int32_t) -1);
+
+    array_merge(A, B, C, l);
   }
 }
 
