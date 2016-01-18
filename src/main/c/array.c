@@ -83,6 +83,9 @@ int array_sort_mergesort(array *A, array * B, array * C, int l, int r) {
 int array_sort_quicksort_partition(array * A, int l, int r) {
   int head = l - 1;
 
+  // Randomly choose a pivot
+  array_swap(A, l + rand() % (r - l + 1), r);
+
   // Everything except the final swap
   for (int i = l; i < r; i++) {
     if (A->data[i] < A->data[r]) {
