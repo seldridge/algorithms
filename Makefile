@@ -15,7 +15,7 @@ G++ = g++
 vpath %.c $(DIR_SRC)/main/c
 vpath %.c $(DIR_SRC)/test/c
 
-.PHONY: all clean
+.PHONY: all clean test
 
 all: $(OBJECTS) $(TARGETS)
 
@@ -24,6 +24,12 @@ $(DIR_BUILD)/%-c.o: %.c
 
 $(DIR_BUILD)/%-c: %.c $(OBJECTS)
 	$(GCC) -O2 -I $(DIR_SRC)/main/c $< $(OBJECTS) -o $@
+
+test:
+	$(DIR_BUILD)/sort-insertion-c
+	$(DIR_BUILD)/sort-merge-c
+	$(DIR_BUILD)/sort-heap-c
+	$(DIR_BUILD)/sort-quick-c
 
 clean:
 	rm -rf $(DIR_BUILD)/*
