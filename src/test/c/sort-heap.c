@@ -2,7 +2,7 @@
 #include <time.h>
 
 int main(int argc, char * argv[]) {
-  heap * H;
+  array * H;
   heap_create(&H, 15);
 
   // Array initialization
