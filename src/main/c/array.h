@@ -8,7 +8,7 @@
 typedef struct {
   uint32_t * data;
   uint32_t length; // length of the array
-  uint32_t size;   // number of valid elements in the heap
+  uint32_t size;   // number of valid elements in the array
 } array;
 
 int array_create(array ** A, uint32_t length);
