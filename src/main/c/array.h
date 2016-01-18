@@ -7,6 +7,7 @@
 
 typedef struct {
   uint32_t * data;
+  uint32_t length;
   uint32_t size;
 } array;
 
@@ -16,11 +17,11 @@ int array_destroy(array ** A);
 
 void array_print(array * A);
 
-void array_swap(array * A, int a, int b);
+void array_swap(uint32_t * data, int a, int b);
 
 void array_set(array * A, uint32_t val);
 
-void array_copy(array * A, array * B, int start_A, int start_B, int num);
+void array_copy(uint32_t * data_A, uint32_t * data_B, int start_A, int start_B, int num);
 
 void array_randomize(array * A);
 

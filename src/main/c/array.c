@@ -20,10 +20,10 @@ void array_print(array * A) {
   printf("\n");
 }
 
-void array_swap(array * A, int a, int b) {
-  uint32_t tmp = A->data[a];
-  A->data[a] = A->data[b];
-  A->data[b] = tmp;
+void array_swap(uint32_t * data, int a, int b) {
+  uint32_t tmp = data[a];
+  data[a] = data[b];
+  data[b] = tmp;
 }
 
 void array_set(array * A, uint32_t val) {
@@ -41,15 +41,15 @@ void array_sort_insertion(array * A) {
   for (int i = 1; i < A->size; i++) {
     int j = i - 1;
     while (j >= 0 && A->data[j] > A->data[j+1]) {
-      array_swap(A, j, j+1);
+      array_swap(A->data, j, j+1);
       j--;
     }
   }
 }
 
-void array_copy(array * A, array * B, int start_A, int start_B, int num) {
+void array_copy(uint32_t * data_A, uint32_t * data_B, int start_A, int start_B, int num) {
   for (int i = 0; i < num; i++)
-    B->data[start_B + i] = A->data[start_A + i];
+    data_B[start_B + i] = data_A[start_A + i];
 }
 
 int array_merge(array *A, array * B, array * C, int l) {
@@ -70,8 +70,8 @@ int array_sort_mergesort(array *A, array * B, array * C, int l, int r) {
     array_sort_mergesort(A, B, C, l, mid);
     array_sort_mergesort(A, B, C, mid + 1, r);
 
-    array_copy(A, B, l, 0, mid - l + 1);
-    array_copy(A, C, mid + 1, 0, r - (mid + 1) + 1);
+    array_copy(A->data, B->data, l, 0, mid - l + 1);
+    array_copy(A->data, C->data, mid + 1, 0, r - (mid + 1) + 1);
 
     B->data[mid - l + 1] = (uint32_t) ((int32_t) -1);
     C->data[r - (mid + 1) + 1] = (uint32_t) ((int32_t) -1);
@@ -84,17 +84,17 @@ int array_sort_quicksort_partition(array * A, int l, int r) {
   int head = l - 1;
 
   // Randomly choose a pivot
-  array_swap(A, l + rand() % (r - l + 1), r);
+  array_swap(A->data, l + rand() % (r - l + 1), r);
 
   // Everything except the final swap
   for (int i = l; i < r; i++) {
     if (A->data[i] < A->data[r]) {
-      array_swap(A, ++head, i);
+      array_swap(A->data, ++head, i);
     }
   }
 
   // Do the final swap
-  array_swap(A, ++head, r);
+  array_swap(A->data, ++head, r);
   return head;
 }
 
