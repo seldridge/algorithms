@@ -1,25 +1,5 @@
 #include "heap.h"
 
-int heap_create(array ** H, uint32_t length) {
-  (*H) = (array *) malloc(sizeof(array));
-  (*H)->data = (uint32_t *) malloc(length * sizeof(uint32_t));
-  (*H)->length = length;
-  (*H)->size = 0;
-  return 0;
-}
-
-int heap_destroy(array ** H) {
-  free((*H)->data);
-  free(*H);
-  return 0;
-}
-
-void heap_randomize(array * H, uint32_t size) {
-  for (int i = 0; i < size; i++)
-    H->data[i] = rand() % 100;
-  H->size = size;
-}
-
 void heap_print(array * H) {
   int shift_amount = 1;
   int count = 0, max = 0;

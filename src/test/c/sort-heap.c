@@ -3,11 +3,11 @@
 
 int main(int argc, char * argv[]) {
   array * H;
-  heap_create(&H, 15);
+  array_create(&H, 15);
 
   // Array initialization
-  // srand(time(NULL));
-  heap_randomize(H, 7);
+  srand(time(NULL));
+  array_randomize(H, 7);
   heap_print(H);
 
   printf("Is max heap? %d\n", heap_is_max_heap(H, 0));
@@ -22,6 +22,6 @@ int main(int argc, char * argv[]) {
   int return_val = -1;
 
   // Clean everything up and exit
-  heap_destroy(&H);
+  array_destroy(&H);
   return return_val;
 }

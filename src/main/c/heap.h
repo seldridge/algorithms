@@ -3,9 +3,6 @@
 
 #include "array.h"
 
-int heap_create(array ** H, uint32_t length);
-int heap_destroy(array ** H);
-void heap_randomize(array * H, uint32_t size);
 void heap_print(array * H);
 
 int heap_parent(array * H, int i);
