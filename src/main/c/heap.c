@@ -90,3 +90,15 @@ void heap_sort(array * A) {
   }
   A->size = size_d;
 }
+
+uint32_t heap_max(array * A) {
+  return A->data[0];
+}
+
+uint32_t heap_extract_max(array * A) {
+  uint32_t max = heap_max(A);
+  array_swap(A->data, 0, A->size - 1);
+  A->size--;
+  heap_max_heapify(A, 0);
+  return max;
+}
