@@ -31,9 +31,9 @@ void heap_max_heapify(array * H, int i) {
   int left = heap_left(H, i);
   int right = heap_right(H, i);
   int largest = i;
-  if (left < H->size - 1 && H->data[left] > H->data[i])
+  if (left < H->size && H->data[left] > H->data[i])
     largest = left;
-  if (right < H->size - 1 && H->data[right] > H->data[largest])
+  if (right < H->size && H->data[right] > H->data[largest])
     largest = right;
   if (largest != i) {
     array_swap(H->data, largest, i);
@@ -50,13 +50,28 @@ int heap_is_max_heap(array * H, int i) {
   int return_val = 0;
   int left = heap_left(H, i);
   int right = heap_right(H, i);
-  if (left < H->size - 1 && H->data[left] > H->data[i])
+  if (left < H->size && H->data[left] > H->data[i])
     return_val--;
-  if (right < H->size - 1 && H->data[right] > H->data[i])
+  if (right < H->size && H->data[right] > H->data[i])
     return_val--;
-  if (left < H->size - 1)
+  if (left < H->size)
     return_val += heap_is_max_heap(H, heap_left(H, i));
-  if (right < H->size - 1)
+  if (right < H->size)
     return_val += heap_is_max_heap(H, heap_right(H, i));
+  return return_val;
+}
+
+int heap_insert(array ** H, uint32_t val) {
+  // If the array is not large enough, then we need to reallocate the
+  // data portion of the array.
+  int return_val = 0;
+  if ((*H)->size == (*H)->length) {
+    (*H)->data = (uint32_t *) realloc((*H)->data, (*H)->length * 2 * sizeof(uint32_t));
+    (*H)->length = (*H)->length * 2;
+    return_val = (*H)->length;
+  }
+
+  (*H)->data[(*H)->size++] = val;
+  heap_build_max_heap(*H);
   return return_val;
 }

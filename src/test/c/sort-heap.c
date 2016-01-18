@@ -3,14 +3,14 @@
 
 int main(int argc, char * argv[]) {
   array * H;
-  array_create(&H, 15);
+  array_create(&H, 1);
 
   // Array initialization
   srand(time(NULL));
-  array_randomize(H, 7);
-  heap_print(H);
-
-  printf("Is max heap? %d\n", heap_is_max_heap(H, 0));
+  // array_randomize(H, 7);
+  for (int i = 0; i < 7; i++) {
+    heap_insert(&H, i);
+  }
 
   // Sort the heap
   heap_build_max_heap(H);
