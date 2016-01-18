@@ -71,8 +71,12 @@ int heap_insert(array ** H, uint32_t val) {
     return_val = (*H)->length;
   }
 
+  int i = (*H)->size;
   (*H)->data[(*H)->size++] = val;
-  heap_build_max_heap(*H);
+  while (i > 0 && (*H)->data[i] > (*H)->data[heap_parent(*H, i)]) {
+    array_swap((*H)->data, heap_parent(*H, i), i);
+    i = heap_parent(*H, i);
+  }
   return return_val;
 }
 
