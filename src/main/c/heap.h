@@ -14,7 +14,7 @@ void heap_build_max_heap(array * H);
 
 int heap_insert(array ** H, uint32_t val);
 uint32_t heap_extract_max(array * H);
-void heap_increase_key(array * H, int i);
+int heap_increase_key(array * H, uint32_t i, uint32_t val);
 uint32_t heap_max(array * H);
 
 int heap_is_max_heap(array * H, int i);

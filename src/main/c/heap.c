@@ -102,3 +102,17 @@ uint32_t heap_extract_max(array * A) {
   heap_max_heapify(A, 0);
   return max;
 }
+
+int heap_increase_key(array * A, uint32_t i, uint32_t val) {
+  if (i >= A->size)
+    return -1;
+  if (val < A->data[i])
+    return -2;
+
+  A->data[i] = val;
+  while (i > 0 && A->data[i] > A->data[heap_parent(A, i)]) {
+    array_swap(A->data, heap_parent(A, i), i);
+    i = heap_parent(A, i);
+  }
+  return 0;
+}
