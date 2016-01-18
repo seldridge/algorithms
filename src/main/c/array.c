@@ -92,6 +92,8 @@ int array_sort_quicksort_partition(array * A, int l, int r) {
       array_swap(A, ++head, i);
     }
   }
+
+  // Do the final swap
   array_swap(A, ++head, r);
   return head;
 }
