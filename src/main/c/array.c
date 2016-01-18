@@ -80,6 +80,27 @@ int array_sort_mergesort(array *A, array * B, array * C, int l, int r) {
   }
 }
 
+int array_sort_quicksort_partition(array * A, int l, int r) {
+  int head = l - 1;
+
+  // Everything except the final swap
+  for (int i = l; i < r; i++) {
+    if (A->data[i] < A->data[r]) {
+      array_swap(A, ++head, i);
+    }
+  }
+  array_swap(A, ++head, r);
+  return head;
+}
+
+int array_sort_quicksort(array * A, int l, int r) {
+  if (l < r) {
+    int mid = array_sort_quicksort_partition(A, l, r);
+    array_sort_quicksort(A, l, mid - 1);
+    array_sort_quicksort(A, mid + 1, r);
+  }
+}
+
 int array_test_sorted(array * A) {
   for (int i = 1; i < A->size; i++)
     if (A->data[i] < A->data[i-1]) return 1;

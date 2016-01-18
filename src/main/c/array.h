@@ -30,6 +30,10 @@ int array_sort_mergesort(array * A, array * B, array * C, int l, int r);
 
 int array_sort_merge(array * A, array * B, array * C, int l, int r, int mid);
 
+int array_sort_quicksort_partition(array *A, int l, int r);
+
+int array_sort_quicksort(array * A, int l, int r);
+
 int array_test_sorted(array * A);
 
 #endif
