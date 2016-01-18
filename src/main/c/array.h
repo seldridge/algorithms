@@ -19,11 +19,11 @@ void array_print(array * A);
 
 void array_swap(uint32_t * data, int a, int b);
 
-void array_set(array * A, uint32_t val, uint32_t size);
+void array_set(array ** A, uint32_t val, uint32_t size);
 
 void array_copy(uint32_t * data_A, uint32_t * data_B, int start_A, int start_B, int num);
 
-void array_randomize(array * A, uint32_t size);
+void array_randomize(array ** A, uint32_t size);
 
 void array_sort_insertion(array * A);
 

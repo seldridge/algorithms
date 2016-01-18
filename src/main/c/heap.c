@@ -75,3 +75,14 @@ int heap_insert(array ** H, uint32_t val) {
   heap_build_max_heap(*H);
   return return_val;
 }
+
+void heap_sort(array * A) {
+  heap_build_max_heap(A);
+  int size_d = A->size;
+  for (int i = 0; i < size_d; i++) {
+    array_swap(A->data, 0, A->size - 1);
+    A->size--;
+    heap_max_heapify(A, 0);
+  }
+  A->size = size_d;
+}

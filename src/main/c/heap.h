@@ -19,4 +19,6 @@ uint32_t heap_max(array * H);
 
 int heap_is_max_heap(array * H, int i);
 
+void heap_sort(array * H);
+
 #endif

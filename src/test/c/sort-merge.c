@@ -9,9 +9,9 @@ int main(int argc, char * argv[]) {
 
   // Array initialization
   srand(time(NULL));
-  array_randomize(A, A->length);
-  array_set(B, (uint32_t) ((int32_t) -1), B->length);
-  array_set(C, (uint32_t) ((int32_t) -1), C->length);
+  array_randomize(&A, A->length);
+  array_set(&B, (uint32_t) ((int32_t) -1), B->length);
+  array_set(&C, (uint32_t) ((int32_t) -1), C->length);
 
   // Merge sort
   array_sort_mergesort(A, B, C, 0, A->size - 1);

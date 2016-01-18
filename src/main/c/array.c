@@ -27,17 +27,24 @@ void array_swap(uint32_t * data, int a, int b) {
   data[b] = tmp;
 }
 
-void array_set(array * A, uint32_t val, uint32_t size) {
+void array_set(array ** A, uint32_t val, uint32_t size) {
+  if ((*A)->length < size) {
+    (*A)->data = (uint32_t *) realloc((*A)->data, size * 2 * sizeof(uint32_t));
+    (*A)->length = size * 2;
+  }
   for (int i = 0; i < size; i++)
-    A->data[i] = val;
-  A->size = size;
+    (*A)->data[i] = val;
+  (*A)->size = size;
 }
 
-void array_randomize(array * A, uint32_t size) {
-  for (int i = 0; i < size; i++) {
-    A->data[i] = rand() % 100;
+void array_randomize(array ** A, uint32_t size) {
+  if ((*A)->length < size) {
+    (*A)->data = (uint32_t *) realloc((*A)->data, size * 2 * sizeof(uint32_t));
+    (*A)->length = size * 2;
   }
-  A->size = size;
+  for (int i = 0; i < size; i++)
+    (*A)->data[i] = rand() % 100;
+  (*A)->size = size;
 }
 
 void array_sort_insertion(array * A) {

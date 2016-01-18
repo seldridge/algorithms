@@ -7,19 +7,17 @@ int main(int argc, char * argv[]) {
 
   // Array initialization
   srand(time(NULL));
-  // array_randomize(H, 7);
-  for (int i = 0; i < 7; i++) {
-    heap_insert(&H, i);
-  }
+  array_randomize(&H, 100000);
 
   // Sort the heap
-  heap_build_max_heap(H);
-  heap_print(H);
-
-  printf("Is now max heap? %d\n", heap_is_max_heap(H, 0));
+  heap_sort(H);
 
   // Test that the sort worked
-  int return_val = -1;
+  int return_val = array_test_sorted(H);
+  if (return_val)
+    printf("[ERROR] Heap sort failed\n");
+  else
+    printf("[INFO] Heap sort passed\n");
 
   // Clean everything up and exit
   array_destroy(&H);

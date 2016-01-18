@@ -7,7 +7,7 @@ int main(int argc, char * argv[]) {
 
   // Array initialization
   srand(time(NULL));
-  array_randomize(A, A->length);
+  array_randomize(&A, A->length);
 
   // Merge sort
   array_sort_quicksort(A, 0, A->size - 1);
