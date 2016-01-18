@@ -1,9 +1,10 @@
 #include "array.h"
 
-int array_create(array ** A, uint32_t size) {
+int array_create(array ** A, uint32_t length) {
   *A = (array *) malloc(sizeof(array));
-  (*A)->data = (uint32_t *) malloc(size * sizeof(uint32_t));
-  (*A)->size = size;
+  (*A)->data = (uint32_t *) malloc(length * sizeof(uint32_t));
+  (*A)->length = length;
+  (*A)->size = 0;
   return 0;
 }
 
@@ -26,15 +27,17 @@ void array_swap(uint32_t * data, int a, int b) {
   data[b] = tmp;
 }
 
-void array_set(array * A, uint32_t val) {
-  for (int i = 0; i < A->size; i++)
+void array_set(array * A, uint32_t val, uint32_t size) {
+  for (int i = 0; i < size; i++)
     A->data[i] = val;
+  A->size = size;
 }
 
-void array_randomize(array * A) {
-  for (int i = 0; i < A->size; i++) {
+void array_randomize(array * A, uint32_t size) {
+  for (int i = 0; i < size; i++) {
     A->data[i] = rand() % 100;
   }
+  A->size = size;
 }
 
 void array_sort_insertion(array * A) {

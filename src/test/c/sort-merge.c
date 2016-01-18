@@ -4,14 +4,14 @@
 int main(int argc, char * argv[]) {
   array * A, * B, * C;
   array_create(&A, 100000);
-  array_create(&B, A->size / 2 + 1);
-  array_create(&C, A->size - (A->size / 2) + 1);
+  array_create(&B, A->length / 2 + 1);
+  array_create(&C, A->length - (A->length / 2) + 1);
 
   // Array initialization
   srand(time(NULL));
-  array_randomize(A);
-  array_set(B, (uint32_t) ((int32_t) -1));
-  array_set(C, (uint32_t) ((int32_t) -1));
+  array_randomize(A, A->length);
+  array_set(B, (uint32_t) ((int32_t) -1), B->length);
+  array_set(C, (uint32_t) ((int32_t) -1), C->length);
 
   // Merge sort
   array_sort_mergesort(A, B, C, 0, A->size - 1);

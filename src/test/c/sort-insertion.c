@@ -7,7 +7,7 @@ int main(int argc, char * argv[]) {
 
   // Array initialization
   srand(time(NULL));
-  array_randomize(A);
+  array_randomize(A, A->length);
 
   // Insertion sort
   array_sort_insertion(A);
