@@ -9,6 +9,12 @@ void linked_list_create(linked_list ** list) {
   (*list)->key = SENTINEL;
 }
 
+void linked_list_destroy(linked_list ** element) {
+  while ((*element)->next != (*element))
+    linked_list_delete((*element)->next);
+  linked_list_delete((*element));
+}
+
 void linked_list_insert(linked_list ** list, uint32_t key) {
   linked_list * ptr = (*list)->next;
   (*list)->next = (linked_list *) malloc(sizeof(linked_list));
@@ -24,12 +30,6 @@ void linked_list_delete(linked_list * element) {
   element->prev->next = element->next;
   element->next->prev = element->prev;
   free(element);
-}
-
-void linked_list_delete_all(linked_list * element) {
-  while (element->next != element)
-    linked_list_delete(element->next);
-  linked_list_delete(element);
 }
 
 void linked_list_print(linked_list * list) {

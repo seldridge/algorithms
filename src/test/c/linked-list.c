@@ -16,7 +16,7 @@ int main (int argc, char * argv[]) {
 
   linked_list_print(list);
 
-  linked_list_delete_all(list);
+  linked_list_destroy(&list);
 
   return 0;
 }

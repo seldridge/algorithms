@@ -14,11 +14,11 @@ typedef struct linked_list{
 } linked_list;
 
 void linked_list_create(linked_list ** list);
+void linked_list_destroy(linked_list ** element);
 
 void linked_list_insert(linked_list ** list, uint32_t key);
 void linked_list_print(linked_list * list);
 linked_list * linked_list_search(linked_list * list, uint32_t key);
 void linked_list_delete(linked_list * element);
-void linked_list_delete_all(linked_list * element);
 
 #endif
