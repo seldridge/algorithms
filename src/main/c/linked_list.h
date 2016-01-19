@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#define SENTINEL (uint32_t) (int32_t) -1
+
 typedef struct linked_list linked_list;
 
 typedef struct linked_list{
@@ -14,7 +16,7 @@ typedef struct linked_list{
 } linked_list;
 
 void linked_list_create(linked_list ** list);
-void linked_list_destroy(linked_list ** element);
+void linked_list_destroy(linked_list * element);
 
 void linked_list_insert(linked_list ** list, uint32_t key);
 void linked_list_print(linked_list * list);

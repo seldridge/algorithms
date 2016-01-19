@@ -1,7 +1,5 @@
 #include "linked_list.h"
 
-#define SENTINEL (uint32_t) (int32_t) -1
-
 void linked_list_create(linked_list ** list) {
   (*list) = (linked_list *) malloc(sizeof(linked_list));
   (*list)->next = (*list);
@@ -9,10 +7,10 @@ void linked_list_create(linked_list ** list) {
   (*list)->key = SENTINEL;
 }
 
-void linked_list_destroy(linked_list ** element) {
-  while ((*element)->next != (*element))
-    linked_list_delete((*element)->next);
-  linked_list_delete((*element));
+void linked_list_destroy(linked_list * element) {
+  while (element->next != element)
+    linked_list_delete(element->next);
+  linked_list_delete(element);
 }
 
 void linked_list_insert(linked_list ** list, uint32_t key) {
@@ -43,7 +41,7 @@ void linked_list_print(linked_list * list) {
 
 linked_list * linked_list_search(linked_list * list, uint32_t key) {
   linked_list * ptr = list->next;
-  while (ptr != NULL && ptr->key != key) {
+  while (ptr->key != SENTINEL && ptr->key != key) {
     ptr = ptr->next;
   }
   return ptr;

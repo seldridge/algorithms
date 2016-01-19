@@ -8,6 +8,7 @@ TARGETS = $(addprefix $(DIR_BUILD)/,$(notdir $(shell \
 
 # C compiler and options
 GCC = gcc
+C_FLAGS = -g -O2
 
 # C++ compiler and options
 G++ = g++
@@ -20,10 +21,10 @@ vpath %.c $(DIR_SRC)/test/c
 all: $(OBJECTS) $(TARGETS)
 
 $(DIR_BUILD)/%-c.o: %.c
-	$(GCC) -O2 -I $(DIR_SRC)/main/c $< -c -o $@
+	$(GCC) $(C_FLAGS) -I $(DIR_SRC)/main/c $< -c -o $@
 
 $(DIR_BUILD)/%-c: %.c $(OBJECTS)
-	$(GCC) -O2 -I $(DIR_SRC)/main/c $< $(OBJECTS) -o $@
+	$(GCC) $(C_FLAGS) -I $(DIR_SRC)/main/c $< $(OBJECTS) -o $@
 
 test:
 	$(DIR_BUILD)/sort-insertion-c
