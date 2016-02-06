@@ -12,7 +12,7 @@ The following tables show the data structures and algorithms contained within th
 | Array                      | C                     |
 | Hash                       | C                     |
 | Linked List                | C                     |
-| Queue                      |                       |
+| Queue                      | C                     |
 | Deque                      |                       |
 | Stack                      |                       |
 | Bloom Filter               |                       |
