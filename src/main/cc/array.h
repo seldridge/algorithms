@@ -30,15 +30,14 @@ class Array {
   int Swap(unsigned int firstIndex, unsigned int secondIndex);
   bool IsSorted();
 
-  void Merge(int startLeft, int stopLeft, int startRight, int stopRight,
-             Array * scratchArray);
-
   void SortInsertion();
   void SortMerge(int startIndex, int stopIndex, Array * tmpArray = NULL);
   void SortHeap();
   void SortQuick();
 
  private:
+  void Merge(int startLeft, int stopLeft, int startRight, int stopRight,
+             Array * scratchArray);
 };
 
 template <class T>
