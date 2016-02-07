@@ -13,7 +13,7 @@ The following tables show the data structures and algorithms contained within th
 | Hash                       | C                     |
 | Linked List                | C                     |
 | Queue                      | C                     |
-| Deque                      |                       |
+| Deque                      | C                     |
 | Stack                      |                       |
 | Bloom Filter               |                       |
 |----------------------------+-----------------------|
