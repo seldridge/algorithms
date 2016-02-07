@@ -14,7 +14,7 @@ The following tables show the data structures and algorithms contained within th
 | Linked List                | x |     |
 | Queue                      | x |     |
 | Deque                      | x |     |
-| Stack                      |   |     |
+| Stack                      | x |     |
 | Bloom Filter               |   |     |
 |----------------------------+---+-----|
 ```
