@@ -14,15 +14,15 @@ namespace algorithms {
 template <class T>
 class Array {
   T * data_;
-  unsigned int length_;  // length of the array
+  size_t length_;  // length of the array
 
  public:
-  Array<T>(unsigned int length);
+  Array<T>(size_t length);
   ~Array();
 
   void Print();
   int Set(int index, T data);
-  int GetLength();
+  size_t GetLength();
   T Get(unsigned int index);
   int CopyToOther(Array * arrayDestination, unsigned int startSource,
                   unsigned int startDestination, unsigned int numberToCopy);
@@ -42,7 +42,7 @@ class Array {
 };
 
 template <class T>
-Array<T>::Array(unsigned int length) {
+Array<T>::Array(size_t length) {
   data_ = NULL;
   if (length)
     data_ = reinterpret_cast<T *>(malloc(length * sizeof(T)));
@@ -80,7 +80,7 @@ int Array<T>::Set(int index, T data) {
 }
 
 template <class T>
-int Array<T>::GetLength() {
+size_t Array<T>::GetLength() {
   return length_;
 }
 
@@ -160,15 +160,11 @@ void Array<T>::Merge(int startLeft, int stopLeft, int startRight, int stopRight,
   int leftIndex = startLeft, rightIndex = startRight;
   for (int scratchIndex = startLeft; scratchIndex < stopRight + 1;
        ++scratchIndex) {
-    if (leftIndex == stopLeft + 1) {
+    if (leftIndex == stopLeft + 1)
       scratchArray->Set(scratchIndex, this->Get(rightIndex++));
-      continue;
-    }
-    if (rightIndex == stopRight + 1) {
+    else if (rightIndex == stopRight + 1)
       scratchArray->Set(scratchIndex, this->Get(leftIndex++));
-      continue;
-    }
-    if (this->Get(leftIndex) < this->Get(rightIndex))
+    else if (this->Get(leftIndex) < this->Get(rightIndex))
       scratchArray->Set(scratchIndex, this->Get(leftIndex++));
     else
       scratchArray->Set(scratchIndex, this->Get(rightIndex++));
