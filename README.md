@@ -9,13 +9,21 @@ The following tables show the data structures and algorithms contained within th
 |----------------------------+---+-----|
 | Algorithm / Data Structure | C | C++ |
 |----------------------------+---+-----|
-| Array                      | x |     |
+| Array                      | x | x   |
 | Hash                       | x |     |
 | Linked List                | x |     |
 | Queue                      | x |     |
 | Deque                      | x |     |
 | Stack                      | x |     |
 | Bloom Filter               |   |     |
+| Tree: Binary               |   |     |
+| Tree: N-ary                |   |     |
+| Tree: Trie                 |   |     |
+| Tree: Splay                |   |     |
+| Tree: AVL                  |   |     |
+| Tree: Red-Black            |   |     |
+| Graph: Adjacency List      |   |     |
+| Graph: Matrix              |   |     |
 |----------------------------+---+-----|
 ```
 
@@ -24,9 +32,13 @@ The following tables show the data structures and algorithms contained within th
 |----------------------------+---+-----|
 | Algorithm / Data Structure | C | C++ |
 |----------------------------+---+-----|
-| Sort: Insertion            | x |     |
+| Sort: Insertion            | x | x   |
 | Sort: Merge                | x |     |
 | Sort: Heap                 | x |     |
 | Sort: Quick                | x |     |
+| Graph: DFS                 |   |     |
+| Graph: BFS                 |   |     |
+| Graph: Dijkstra            |   |     |
+| Graph: A*                  |   |     |
 |----------------------------+---+-----|
 ```
