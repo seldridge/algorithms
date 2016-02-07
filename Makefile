@@ -18,12 +18,12 @@ CC_TARGETS = $(addprefix $(DIR_BUILD)/,$(notdir $(shell \
 
 # C options
 GCC = gcc
-C_FLAGS = -g -O2
+C_FLAGS = -g -O2 -Wall -Werror
 
 # C++ options
 CC_LINT = cpplint
 GPP = g++
-CC_FLAGS = -std=c++11 -g -O2
+CC_FLAGS = -std=c++11 -g -O2 -Wall -Werror
 
 # C++ compiler and options
 G++ = g++

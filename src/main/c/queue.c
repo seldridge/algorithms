@@ -64,4 +64,5 @@ int printQueue(queue_t * queue) {
   else if (queue->full) printf("f");
   else                  printf(" ");
   printf("\n");
+  return 0;
 }

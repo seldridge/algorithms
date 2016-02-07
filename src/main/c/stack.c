@@ -55,4 +55,5 @@ int stackPrint(stack_t * s) {
   if (s->top == 0)            printf("e");
   else if (s->top == s->size) printf("f");
   printf("\n");
+  return 0;
 }

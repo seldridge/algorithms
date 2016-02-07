@@ -21,7 +21,7 @@ class Array {
   ~Array();
 
   void Print();
-  int Set(int index, T data);
+  int Set(unsigned int index, T data);
   size_t GetLength();
   T Get(unsigned int index);
   int CopyToOther(Array * arrayDestination, unsigned int startSource,
@@ -57,14 +57,14 @@ Array<T>::~Array() {
 
 template <class T>
 void Array<T>::Print() {
-  for (int i = 0; i < length_; ++i) {
+  for (unsigned int i = 0; i < length_; ++i) {
     std::cout << i << ": " << data_[i] << std::endl;
   }
   std::cout << std::endl;
 }
 
 template <class T>
-int Array<T>::Set(int index, T data) {
+int Array<T>::Set(unsigned int index, T data) {
   int returnVal = 0;
   if (index >= length_) {
     if (data_ != NULL)
@@ -98,7 +98,7 @@ int Array<T>::CopyToOther(Array * arrayDestination, unsigned int startSource,
   if (startSource + numberToCopy > length_)
     return -1;
 
-  for (int i = 0; i < numberToCopy; ++i)
+  for (unsigned int i = 0; i < numberToCopy; ++i)
     arrayDestination->Set(startDestination + i, data_[startSource + i]);
   return 0;
 }
@@ -106,7 +106,7 @@ int Array<T>::CopyToOther(Array * arrayDestination, unsigned int startSource,
 template <class T>
 void Array<T>::Randomize(int low, int high) {
   unsigned int seed = time(NULL);
-  for (int i = 0; i < length_; ++i)
+  for (unsigned int i = 0; i < length_; ++i)
     data_[i] = (rand_r(&seed) % (high - low)) + low;
 }
 
@@ -117,11 +117,12 @@ int Array<T>::Swap(unsigned int firstIndex, unsigned int secondIndex) {
   T tmp = data_[firstIndex];
   this->Set(firstIndex, data_[secondIndex]);
   this->Set(secondIndex, tmp);
+  return 0;
 }
 
 template <class T>
 bool Array<T>::IsSorted() {
-  for (int i = 1; i < length_; i++) {
+  for (unsigned int i = 1; i < length_; i++) {
     if (data_[i] < data_[i-1])
       return false;
   }
@@ -130,7 +131,7 @@ bool Array<T>::IsSorted() {
 
 template <class T>
 void Array<T>::SortInsertion() {
-  for (int i = 1; i < length_; ++i) {
+  for (unsigned int i = 1; i < length_; ++i) {
     int index_swap = i;
     while (index_swap > 0 &&
            this->Get(index_swap) < this->Get(index_swap - 1)) {

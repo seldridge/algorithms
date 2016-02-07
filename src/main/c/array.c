@@ -71,7 +71,7 @@ int array_merge(array *A, array * B, array * C, int l) {
     else
       A->data[i++] = C->data[c++];
   }
-
+  return 0;
 }
 
 int array_sort_mergesort(array *A, array * B, array * C, int l, int r) {
@@ -88,6 +88,7 @@ int array_sort_mergesort(array *A, array * B, array * C, int l, int r) {
 
     array_merge(A, B, C, l);
   }
+  return 0;
 }
 
 int array_sort_quicksort_partition(array * A, int l, int r) {
@@ -114,6 +115,7 @@ int array_sort_quicksort(array * A, int l, int r) {
     array_sort_quicksort(A, l, mid - 1);
     array_sort_quicksort(A, mid + 1, r);
   }
+  return 0;
 }
 
 int array_test_sorted(array * A) {

@@ -43,4 +43,5 @@ int dequePopBack(deque_t * deque, uint32_t * data) {
 
 int printDeque(deque_t * deque) {
   printQueue((queue_t *) deque);
+  return 0;
 }

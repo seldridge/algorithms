@@ -71,7 +71,6 @@ int main(int argc, char * argv[]) {
   else
     printf("[FAIL] Stack pop empty\n");
 
- finish:
   if (s != NULL)
     stackDestroy(&s);
   return 0;

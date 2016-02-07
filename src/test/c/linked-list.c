@@ -10,7 +10,7 @@ int main (int argc, char * argv[]) {
   linked_list_print(list);
 
   linked_list * ptr = linked_list_search(list, 2);
-  printf("Found key %d at ptr 0x%08lx\n", 2, ptr);
+  printf("Found key %d at ptr 0x%08lx\n", 2, (uint64_t) ptr);
 
   linked_list_delete(ptr);
 
