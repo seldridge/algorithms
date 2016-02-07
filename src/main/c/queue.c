@@ -41,3 +41,28 @@ int queueDequeue(queue_t * queue, uint32_t * data) {
   queue->empty = queue->head == queue->tail;
   return 0;
 }
+
+int printQueue(queue_t * queue) {
+  if (queue == NULL) {
+    printf("[ERROR] Tried to print uninitialized queue");
+    return -1;
+  }
+
+  for (uint32_t i = 0; i < queue->size; i++)
+    printf("%2d|", queue->data[i]);
+  printf("\n");
+
+  for (uint32_t i = 0; i < queue->size; i++) {
+    if (i == queue->head) printf("h");
+    else                  printf("_");
+
+    if (i == queue->tail) printf("t|");
+    else                  printf("_|");
+  }
+
+  if (queue->empty) printf("e");
+  else              printf(" ");
+
+  if (queue->full)  printf("f");
+  printf("\n");
+}

@@ -7,8 +7,8 @@
 
 typedef struct {
   uint32_t * data;
-  uint32_t head;
-  uint32_t tail;
+  int32_t head;
+  int32_t tail;
   uint32_t size;
   int empty;
   int full;
@@ -19,5 +19,7 @@ void queueDestroy(queue_t ** queue);
 
 int queueEnqueue(queue_t * queue, uint32_t data);
 int queueDequeue(queue_t * queue, uint32_t * data);
+
+int printQueue(queue_t * queue);
 
 #endif
