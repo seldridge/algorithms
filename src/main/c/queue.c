@@ -60,9 +60,8 @@ int printQueue(queue_t * queue) {
     else                  printf("_|");
   }
 
-  if (queue->empty) printf("e");
-  else              printf(" ");
-
-  if (queue->full)  printf("f");
+  if (queue->empty)     printf("e");
+  else if (queue->full) printf("f");
+  else                  printf(" ");
   printf("\n");
 }
