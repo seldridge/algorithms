@@ -2,7 +2,7 @@
 
 int main(int argc, char * argv[]) {
   deque_t * deque = NULL;
-  uint32_t size = 8;
+  uint32_t size = 10000;
   int returnVal = 0, testPass;
 
   if (dequeCreate(&deque, size)) {
@@ -84,7 +84,7 @@ int main(int argc, char * argv[]) {
     printf("[FAIL] Deque pop front/back test\n");
 
  finish:
-  if (deque == NULL)
+  if (deque != NULL)
     dequeDestroy(&deque);
   return returnVal;
 }
