@@ -6,27 +6,27 @@ The following tables show the data structures and algorithms contained within th
 
 ### Data Structures
 ```
-|----------------------------+-----------------------|
-| Algorithm / Data Structure | Implemented Languages |
-|----------------------------+-----------------------|
-| Array                      | C                     |
-| Hash                       | C                     |
-| Linked List                | C                     |
-| Queue                      | C                     |
-| Deque                      | C                     |
-| Stack                      |                       |
-| Bloom Filter               |                       |
-|----------------------------+-----------------------|
+|----------------------------+---+-----|
+| Algorithm / Data Structure | C | C++ |
+|----------------------------+---+-----|
+| Array                      | x |     |
+| Hash                       | x |     |
+| Linked List                | x |     |
+| Queue                      | x |     |
+| Deque                      | x |     |
+| Stack                      |   |     |
+| Bloom Filter               |   |     |
+|----------------------------+---+-----|
 ```
 
 ### Algorithms
 ```
-|----------------------------+-----------------------|
-| Algorithm / Data Structure | Implemented Languages |
-|----------------------------+-----------------------|
-| Sort: Insertion            | C                     |
-| Sort: Merge                | C                     |
-| Sort: Heap                 | C                     |
-| Sort: Quick                | C                     |
-|----------------------------+-----------------------|
+|----------------------------+---+-----|
+| Algorithm / Data Structure | C | C++ |
+|----------------------------+---+-----|
+| Sort: Insertion            | x |     |
+| Sort: Merge                | x |     |
+| Sort: Heap                 | x |     |
+| Sort: Quick                | x |     |
+|----------------------------+---+-----|
 ```
