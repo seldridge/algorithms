@@ -33,7 +33,7 @@ The following tables show the data structures and algorithms contained within th
 | Algorithm / Data Structure | C | C++ |
 |----------------------------+---+-----|
 | Sort: Insertion            | x | x   |
-| Sort: Merge                | x |     |
+| Sort: Merge                | x | x   |
 | Sort: Heap                 | x |     |
 | Sort: Quick                | x |     |
 | Graph: DFS                 |   |     |

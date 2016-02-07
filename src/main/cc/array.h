@@ -30,9 +30,11 @@ class Array {
   int Swap(unsigned int firstIndex, unsigned int secondIndex);
   bool IsSorted();
 
+  void Merge(int startLeft, int stopLeft, int startRight, int stopRight,
+             Array * scratchArray);
+
   void SortInsertion();
-  void SortMerge(Array * tmpArray, unsigned int startIndex,
-                 unsigned int stopIndex);
+  void SortMerge(int startIndex, int stopIndex, Array * tmpArray = NULL);
   void SortHeap();
   void SortQuick();
 
@@ -139,10 +141,39 @@ void Array<T>::SortInsertion() {
 }
 
 template <class T>
-void Array<T>::SortMerge(Array * tmpArray, unsigned int firstIndex,
-                         unsigned int secondIndex) {
-  // if (tmpArray == NULL)
-  //   tmpArray =
+void Array<T>::SortMerge(int startIndex, int stopIndex, Array * scratchArray) {
+  // Deal with the case of an unallocated scratchArray
+  if (scratchArray == NULL)
+    scratchArray = new Array<T>(this->GetLength());
+
+  if (stopIndex != startIndex) {
+    int mid_point = (stopIndex - startIndex) / 2 + startIndex;
+    this->SortMerge(startIndex, mid_point, scratchArray);
+    this->SortMerge(mid_point + 1, stopIndex, scratchArray);
+    this->Merge(startIndex, mid_point, mid_point + 1, stopIndex, scratchArray);
+  }
+}
+
+template <class T>
+void Array<T>::Merge(int startLeft, int stopLeft, int startRight, int stopRight,
+                     Array * scratchArray) {
+  int leftIndex = startLeft, rightIndex = startRight;
+  for (int scratchIndex = startLeft; scratchIndex < stopRight + 1;
+       ++scratchIndex) {
+    if (leftIndex == stopLeft + 1) {
+      scratchArray->Set(scratchIndex, this->Get(rightIndex++));
+      continue;
+    }
+    if (rightIndex == stopRight + 1) {
+      scratchArray->Set(scratchIndex, this->Get(leftIndex++));
+      continue;
+    }
+    if (this->Get(leftIndex) < this->Get(rightIndex))
+      scratchArray->Set(scratchIndex, this->Get(leftIndex++));
+    else
+      scratchArray->Set(scratchIndex, this->Get(rightIndex++));
+  }
+  scratchArray->CopyToOther(this, startLeft, startLeft, stopRight - startLeft + 1);
 }
 
 }  // namespace algorithms
