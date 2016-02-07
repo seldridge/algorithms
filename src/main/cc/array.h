@@ -23,7 +23,7 @@ class Array {
   void Print();
   int Set(int index, T data);
   int GetLength();
-  T GetData(unsigned int index);
+  T Get(unsigned int index);
   int CopyToOther(Array * arrayDestination, unsigned int startSource,
                   unsigned int startDestination, unsigned int numberToCopy);
   void Randomize(int low, int high);
@@ -31,6 +31,10 @@ class Array {
   bool IsSorted();
 
   void SortInsertion();
+  void SortMerge(Array * tmpArray, unsigned int startIndex,
+                 unsigned int stopIndex);
+  void SortHeap();
+  void SortQuick();
 
  private:
 };
@@ -79,11 +83,10 @@ int Array<T>::GetLength() {
 }
 
 template <class T>
-T Array<T>::GetData(unsigned int index) {
-  T returnVal = 0;
-  if (index < length_)
-    returnVal = data_[index];
-  return returnVal;
+T Array<T>::Get(unsigned int index) {
+  if (index >= length_)
+    return 0;
+  return data_[index];
 }
 
 template <class T>
@@ -127,11 +130,19 @@ template <class T>
 void Array<T>::SortInsertion() {
   for (int i = 1; i < length_; ++i) {
     int index_swap = i;
-    while (data_[index_swap] < data_[index_swap - 1]) {
+    while (index_swap > 0 &&
+           this->Get(index_swap) < this->Get(index_swap - 1)) {
       this->Swap(index_swap, index_swap - 1);
       --index_swap;
     }
   }
+}
+
+template <class T>
+void Array<T>::SortMerge(Array * tmpArray, unsigned int firstIndex,
+                         unsigned int secondIndex) {
+  // if (tmpArray == NULL)
+  //   tmpArray =
 }
 
 }  // namespace algorithms
