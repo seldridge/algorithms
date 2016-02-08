@@ -34,6 +34,7 @@ class Array {
   void SortInsertion();
   void SortMerge(int startIndex, int stopIndex, Array * tmpArray = NULL);
   void SortHeap(size_t size);
+  void SortQuick(unsigned int indexLeft, unsigned int indexRight);
   void SortQuick();
 
  private:
@@ -44,6 +45,7 @@ class Array {
   unsigned int HeapParent(unsigned int childIndex);
   void MaxHeapify(unsigned int rootIndex, size_t size);
   void BuildMaxHeap(size_t size);
+  unsigned int Partition(unsigned int indexLeft, unsigned int indexRight);
 };
 
 template <class T>
@@ -237,6 +239,34 @@ void Array<T>::SortHeap(size_t size) {
     this->Swap(0, tail);
     this->MaxHeapify(0, tail);
   }
+}
+
+template <class T>
+unsigned int Array<T>::Partition(unsigned int indexLeft, unsigned int indexRight) {
+  unsigned int indexBoundary = indexLeft;
+  T pivot = this->Get(indexRight);
+  for (unsigned int i = indexLeft; i < indexRight; ++i) {
+    if (this->Get(i) < pivot)
+      this->Swap(i, indexBoundary++);
+  }
+  this->Swap(indexRight, indexBoundary);
+  return indexBoundary;
+}
+
+template <class T>
+void Array<T>::SortQuick(unsigned int indexLeft, unsigned int indexRight) {
+  if (indexLeft < indexRight) {
+    unsigned int pivot_point = this->Partition(indexLeft, indexRight);
+    if (indexLeft + 1 < pivot_point)
+      this->SortQuick(indexLeft, pivot_point - 1);
+    if (pivot_point + 1 < indexRight)
+      this->SortQuick(pivot_point + 1, indexRight);
+  }
+}
+
+template <class T>
+void Array<T>::SortQuick() {
+  this->SortQuick(0, this->GetLength() - 1);
 }
 
 }  // namespace algorithms

@@ -24,10 +24,17 @@ bool TestHeapSort() {
   return a.IsSorted();
 }
 
-int main() {
-  bool passed_all_tests = true;
+bool TestQuickSort() {
+  algorithms::Array<int> a(100000);
+  a.Randomize(0, 100);
+  a.SortQuick();
+  return a.IsSorted();
+}
 
-  bool passed_test = TestInsertionSort();
+int main() {
+  bool passed_all_tests = true, passed_test;
+
+  passed_test = TestInsertionSort();
   passed_all_tests &= passed_test;
   std::cout << (passed_test?"[PASS]":"[FAIL]") << " InsertionSort" << std::endl;
 
@@ -38,6 +45,10 @@ int main() {
   passed_test = TestHeapSort();
   passed_all_tests &= passed_test;
   std::cout << (passed_test?"[PASS]":"[FAIL]") << " HeapSort" << std::endl;
+
+  passed_test = TestQuickSort();
+  passed_all_tests &= passed_test;
+  std::cout << (passed_test?"[PASS]":"[FAIL]") << " QuickSort" << std::endl;
 
   return !passed_all_tests;
 }

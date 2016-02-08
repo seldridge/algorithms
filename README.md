@@ -35,7 +35,7 @@ The following tables show the data structures and algorithms contained within th
 | Sort: Insertion            | x | x   |
 | Sort: Merge                | x | x   |
 | Sort: Heap                 | x | x   |
-| Sort: Quick                | x |     |
+| Sort: Quick                | x | x   |
 | Graph: DFS                 |   |     |
 | Graph: BFS                 |   |     |
 | Graph: Dijkstra            |   |     |
