@@ -21,6 +21,7 @@ class Array {
   ~Array();
 
   void Print();
+  void PrintHeap(size_t size);
   int Set(unsigned int index, T data);
   size_t GetLength();
   T Get(unsigned int index);
@@ -32,12 +33,17 @@ class Array {
 
   void SortInsertion();
   void SortMerge(int startIndex, int stopIndex, Array * tmpArray = NULL);
-  void SortHeap();
+  void SortHeap(size_t size);
   void SortQuick();
 
  private:
   void Merge(int startLeft, int stopLeft, int startRight, int stopRight,
              Array * scratchArray);
+  unsigned int HeapLeft(unsigned int rootIndex);
+  unsigned int HeapRight(unsigned int rootIndex);
+  unsigned int HeapParent(unsigned int childIndex);
+  void MaxHeapify(unsigned int rootIndex, size_t size);
+  void BuildMaxHeap(size_t size);
 };
 
 template <class T>
@@ -60,6 +66,20 @@ void Array<T>::Print() {
     std::cout << i << ": " << data_[i] << std::endl;
   }
   std::cout << std::endl;
+}
+
+template <class T>
+void Array<T>::PrintHeap(size_t size) {
+  int max = 1, layer_count = 0;
+  for (unsigned int i = 0; i < size; i++) {
+    std::cout << this->Get(i) << " ";
+    if (++layer_count == max) {
+      std::cout << "\n";
+      layer_count = 0;
+      max = max << 1;
+    }
+  }
+  std::cout << "\n";
 }
 
 template <class T>
@@ -170,6 +190,53 @@ void Array<T>::Merge(int startLeft, int stopLeft, int startRight, int stopRight,
       scratchArray->Set(scratchIndex, this->Get(rightIndex++));
   }
   scratchArray->CopyToOther(this, startLeft, startLeft, stopRight - startLeft + 1);
+}
+
+template <class T>
+unsigned int Array<T>::HeapLeft(unsigned int rootIndex) {
+  return (rootIndex + 1) * 2 - 1;
+}
+
+template <class T>
+unsigned int Array<T>::HeapRight(unsigned int rootIndex) {
+  return (rootIndex + 1) * 2;
+}
+
+template <class T>
+unsigned int Array<T>::HeapParent(unsigned int childIndex) {
+  return (childIndex - 2) / 2;
+}
+
+template <class T>
+void Array<T>::MaxHeapify(unsigned int rootIndex, size_t size) {
+  unsigned int leftIndex = this->HeapLeft(rootIndex);
+  unsigned int rightIndex = this->HeapRight(rootIndex);
+  unsigned int largest = rootIndex;
+
+  if (leftIndex < size && this->Get(leftIndex) > this->Get(largest))
+    largest = leftIndex;
+  if (rightIndex < size && this->Get(rightIndex) > this->Get(largest))
+    largest = rightIndex;
+  if (largest != rootIndex) {
+    this->Swap(rootIndex, largest);
+    this->MaxHeapify(largest, size);
+  }
+}
+
+template <class T>
+void Array<T>::BuildMaxHeap(size_t size) {
+  for (int i = size / 2 - 1; i >= 0; --i) {
+    MaxHeapify(i, size);
+  }
+}
+
+template <class T>
+void Array<T>::SortHeap(size_t size) {
+  this->BuildMaxHeap(size);
+  for (unsigned int tail = size - 1; tail > 0; --tail) {
+    this->Swap(0, tail);
+    this->MaxHeapify(0, tail);
+  }
 }
 
 }  // namespace algorithms

@@ -17,18 +17,27 @@ bool TestMergeSort() {
   return a.IsSorted();
 }
 
+bool TestHeapSort() {
+  algorithms::Array<int> a(100000);
+  a.Randomize(0, 100);
+  a.SortHeap(a.GetLength());
+  return a.IsSorted();
+}
+
 int main() {
   bool passed_all_tests = true;
 
   bool passed_test = TestInsertionSort();
   passed_all_tests &= passed_test;
-  std::cout << (passed_test ? "[PASS]" : "[FAIL]") <<
-    " InsertionSort" << std::endl;
+  std::cout << (passed_test?"[PASS]":"[FAIL]") << " InsertionSort" << std::endl;
 
   passed_test = TestMergeSort();
   passed_all_tests &= passed_test;
-  std::cout << (passed_test ? "[PASS]" : "[FAIL]") <<
-    " MergeSort" << std::endl;
+  std::cout << (passed_test?"[PASS]":"[FAIL]") << " MergeSort" << std::endl;
+
+  passed_test = TestHeapSort();
+  passed_all_tests &= passed_test;
+  std::cout << (passed_test?"[PASS]":"[FAIL]") << " HeapSort" << std::endl;
 
   return !passed_all_tests;
 }
