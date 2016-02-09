@@ -45,10 +45,12 @@ $(DIR_BUILD)/%-c: %.c $(C_OBJECTS)
 	$(GCC) $(C_FLAGS) -I $(DIR_SRC)/main/c $< $(C_OBJECTS) -o $@
 
 $(DIR_BUILD)/%-cc.o: %.cc $(CC_HEADERS)
+	@ cat $< | grep ^#include | awk '{print $$2}' | xargs $(CC_LINT)
 	$(CC_LINT) $<
 	$(GPP) $(CC_FLAGS) -I . $< -c -o $@
 
 $(DIR_BUILD)/%-cc: %.cc $(CC_OBJECTS) $(CC_HEADERS)
+	@ cat $< | grep ^#include | awk '{print $$2}' | xargs $(CC_LINT)
 	$(CC_LINT) $<
 	$(GPP) $(CC_FLAGS) -I . $< $(CC_OBJECTS) -o $@
 	echo $(CC_HEADERS)
