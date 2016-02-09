@@ -191,7 +191,8 @@ void Array<T>::Merge(int startLeft, int stopLeft, int startRight, int stopRight,
     else
       scratchArray->Set(scratchIndex, this->Get(rightIndex++));
   }
-  scratchArray->CopyToOther(this, startLeft, startLeft, stopRight - startLeft + 1);
+  scratchArray->CopyToOther(this, startLeft, startLeft,
+                            stopRight - startLeft + 1);
 }
 
 template <class T>
@@ -242,7 +243,8 @@ void Array<T>::SortHeap(size_t size) {
 }
 
 template <class T>
-unsigned int Array<T>::Partition(unsigned int indexLeft, unsigned int indexRight) {
+unsigned int Array<T>::Partition(unsigned int indexLeft,
+                                 unsigned int indexRight) {
   unsigned int indexBoundary = indexLeft;
   T pivot = this->Get(indexRight);
   for (unsigned int i = indexLeft; i < indexRight; ++i) {
