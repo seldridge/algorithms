@@ -5,9 +5,9 @@
 int main() {
   algorithms::Graph<int> graph;
 
-  graph.AddNode(0);
-  graph.AddNode(1);
-  graph.AddNode(2);
+  // graph.AddNode(0);
+  // graph.AddNode(1);
+  // graph.AddNode(2);
 
   graph.AddConnection(0, 1);
   graph.AddConnection(0, 2);
