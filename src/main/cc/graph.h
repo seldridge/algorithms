@@ -17,6 +17,7 @@ typedef enum {
 
 template <class T> class GraphNode {
   T value_;
+  int depth_;
   kColor color_;
   std::vector< GraphNode<T> * > connections_;
 
@@ -26,15 +27,19 @@ template <class T> class GraphNode {
   T Get();
   int AddConnection(GraphNode<T> * nodePointer);
   void Print();
-  void ChangeColor(kColor newColor);
+  kColor ChangeColor(kColor newColor);
+  int ResetDepth();
+  int GetDepth();
  private:
+  int SetDepth(int newDepth);
   bool HasConnection(GraphNode<T> * nodePointer);
-  void Set(T value);
+  int Set(T value);
 };
 
 template <class T> GraphNode<T>::GraphNode(T value) {
   value_ = value;
   color_ = kWhite;
+  depth_ = -1;
 }
 
 template <class T> GraphNode<T>::~GraphNode() {
@@ -61,22 +66,41 @@ template <class T> int GraphNode<T>::AddConnection(GraphNode<T> * nodePointer) {
 
 template <class T> void GraphNode<T>::Print() {
   switch (color_) {
-    case kWhite: std::cout << "(W) "; break;
-    case kGray:  std::cout << "(G) "; break;
-    case kBlack: std::cout << "(B) ";
+    case kWhite: std::cout << "(W, "; break;
+    case kGray:  std::cout << "(G, "; break;
+    case kBlack: std::cout << "(B, ";
   }
+  std::cout << depth_ << ") ";
 
   for (size_t i = 0; i < connections_.size(); ++i)
     std::cout << connections_[i]->Get() << " ";
   std::cout << std::endl;
 }
 
-template <class T> void GraphNode<T>::ChangeColor(kColor newColor) {
+template <class T> kColor GraphNode<T>::ChangeColor(kColor newColor) {
+  kColor oldColor = color_;
   color_ = newColor;
+  return oldColor;
 }
 
-template <class T> void GraphNode<T>::Set(T value) {
+template <class T> int GraphNode<T>::ResetDepth() {
+  return this->SetDepth(-1);
+}
+
+template <class T> int GraphNode<T>::GetDepth() {
+  return depth_;
+}
+
+template <class T> int GraphNode<T>::Set(T value) {
+  int oldValue = value_;
   value_ = value;
+  return oldValue;
+}
+
+template <class T> int GraphNode<T>::SetDepth(int newDepth) {
+  int oldDepth = depth_;
+  depth_ = newDepth;
+  return oldDepth;
 }
 
 template <class T> class Graph {
