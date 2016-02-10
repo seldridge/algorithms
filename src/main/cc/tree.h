@@ -16,6 +16,7 @@ template <class T> class Tree {
   explicit Tree(unsigned int aryness = 2);
   ~Tree();
   void AddNode(T value);
+  Node<T> * GetRoot();
 
   // Traversal Algorithms
   void TraversePreOrder(std::vector< Node<T> * > * vector);
@@ -56,6 +57,10 @@ template <class T> void Tree<T>::AddNode(T nodeValue) {
   }
 }
 
+template <class T> Node<T> * Tree<T>::GetRoot() {
+  return root_;
+}
+
 template <class T> void Tree<T>::TraversePreOrder(
     std::vector< Node<T> * > * vector) {
   if (root_) root_->TraversePreOrder(vector);
@@ -82,20 +87,32 @@ template <class T> void Tree<T>::TraverseLevelOrder(
   }
 }
 
-template <class T> class BinaryTree : public Tree<T> {
+template <class T> class BinaryTree : private Tree<T> {
  public:
   BinaryTree();
-  ~BinaryTree();
 };
 
 template <class T> BinaryTree<T>::BinaryTree()
     : Tree<T>(2) {}
 
-template <class T> class BinarySearchTree : public BinaryTree<T> {
+template <class T> class BinarySearchTree : private BinaryTree<T> {
  public:
   BinarySearchTree();
-  ~BinarySearchTree();
+  Node<T> * Search(T nodeValue);
+  void AddNode(T nodeValue);
 };
+
+template <class T> BinarySearchTree<T>::BinarySearchTree() {
+}
+
+
+template <class T> Node<T> * BinarySearchTree<T>::Search(T nodeValue) {
+  if (!this->GetRoot())
+    return nullptr;
+}
+
+template <class T> void BinarySearchTree<T>::AddNode(T nodeValue) {
+}
 
 }  // namespace algorithms
 

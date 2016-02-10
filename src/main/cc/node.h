@@ -27,6 +27,9 @@ template <class T> class Node {
   void TraverseLevelOrder(std::queue< Node<T>* > * queue,
                           std::vector< Node<T>* > * vector);
 
+  // Search related
+  Node<T> * BinarySearch(T searchValue);
+
  private:
   unsigned int aryness_;
   T value_;
@@ -108,6 +111,17 @@ template <class T> void Node<T>::TraverseLevelOrder(
 
 template <class T> size_t Node<T>::NumberOfChildren() {
   return children_.size();
+}
+
+template <class T> Node<T> * Node<T>::BinarySearch(T searchValue) {
+  if (this->Get() == searchValue)
+    return this;
+  for (size_t i = 0; i < children_[i].size(); ++i) {
+    Node<T> * check = children_[i]->BinarySearch(searchValue);
+    if (check)
+      return check;
+  }
+  return nullptr;
 }
 
 }  // namespace algorithms
