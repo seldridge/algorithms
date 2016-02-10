@@ -16,8 +16,8 @@ The following tables show the data structures and algorithms contained within th
 | Deque                      | x |     |
 | Stack                      | x |     |
 | Bloom Filter               |   |     |
-| Tree: Binary               |   |     |
-| Tree: N-ary                |   |     |
+| Tree: Binary               |   | x   |
+| Tree: N-ary                |   | x   |
 | Tree: Trie                 |   |     |
 | Tree: Splay                |   |     |
 | Tree: AVL                  |   |     |
@@ -29,16 +29,20 @@ The following tables show the data structures and algorithms contained within th
 
 ### Algorithms
 ```
-|----------------------------+---+-----|
-| Algorithm / Data Structure | C | C++ |
-|----------------------------+---+-----|
-| Sort: Insertion            | x | x   |
-| Sort: Merge                | x | x   |
-| Sort: Heap                 | x | x   |
-| Sort: Quick                | x | x   |
-| Graph: DFS                 |   |     |
-| Graph: BFS                 |   |     |
-| Graph: Dijkstra            |   |     |
-| Graph: A*                  |   |     |
-|----------------------------+---+-----|
+|-----------------------------+---+-----|
+| Algorithm / Data Structure  | C | C++ |
+|-----------------------------+---+-----|
+| Sort: Insertion             | x | x   |
+| Sort: Merge                 | x | x   |
+| Sort: Heap                  | x | x   |
+| Sort: Quick                 | x | x   |
+| Tree: Traversal Postorder   |   | x   |
+| Tree: Traversal Inorder     |   | x   |
+| Tree: Traversal Preorder    |   | x   |
+| Tree: Traversal Layer Order |   | x   |
+| Graph: DFS                  |   |     |
+| Graph: BFS                  |   |     |
+| Graph: Dijkstra             |   |     |
+| Graph: A*                   |   |     |
+|-----------------------------+---+-----|
 ```

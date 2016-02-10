@@ -28,6 +28,15 @@ template <class T> class Tree {
   Node<T> * root_;
 };
 
+template <class T> class BinaryTree : public Tree<T> {
+ public:
+  BinaryTree();
+  ~BinaryTree();
+};
+
+template <class T> BinaryTree<T>::BinaryTree()
+    : Tree<T>(2) {}
+
 template <class T> Tree<T>::Tree(unsigned int aryness) {
   aryness_ = aryness;
   root_ = nullptr;
