@@ -17,6 +17,7 @@ typedef enum {
 
 template <class T> class GraphNode {
   T value_;
+  kColor color_;
   std::vector< GraphNode<T> * > connections_;
 
  public:
@@ -24,7 +25,8 @@ template <class T> class GraphNode {
   ~GraphNode();
   T Get();
   int AddConnection(GraphNode<T> * nodePointer);
-  void PrintConnections();
+  void Print();
+  void ChangeColor(kColor newColor);
  private:
   bool HasConnection(GraphNode<T> * nodePointer);
   void Set(T value);
@@ -32,6 +34,7 @@ template <class T> class GraphNode {
 
 template <class T> GraphNode<T>::GraphNode(T value) {
   value_ = value;
+  color_ = kWhite;
 }
 
 template <class T> GraphNode<T>::~GraphNode() {
@@ -56,10 +59,20 @@ template <class T> int GraphNode<T>::AddConnection(GraphNode<T> * nodePointer) {
   return 0;
 }
 
-template <class T> void GraphNode<T>::PrintConnections() {
+template <class T> void GraphNode<T>::Print() {
+  switch (color_) {
+    case kWhite: std::cout << "(W) "; break;
+    case kGray:  std::cout << "(G) "; break;
+    case kBlack: std::cout << "(B) ";
+  }
+
   for (size_t i = 0; i < connections_.size(); ++i)
     std::cout << connections_[i]->Get() << " ";
   std::cout << std::endl;
+}
+
+template <class T> void GraphNode<T>::ChangeColor(kColor newColor) {
+  color_ = newColor;
 }
 
 template <class T> void GraphNode<T>::Set(T value) {
@@ -69,18 +82,13 @@ template <class T> void GraphNode<T>::Set(T value) {
 template <class T> class Graph {
   std::vector< GraphNode<T> * > adjacencyList_;
 
-  typedef enum {
-    kWhite,
-    kGray,
-    kBlack
-  } color;
-
  public:
   Graph();
   ~Graph();
   GraphNode<T> * AddNode(T nodeValue);
   int AddConnection(T fromNode, T toNode);
   void Print();
+  void ResetColor(kColor newColor = kWhite);
 
   // Traversal
   void DepthFirstSearch(T startNode, std::vector<T> * bfsVector);
@@ -118,8 +126,13 @@ template <class T> int Graph<T>::AddConnection(T fromNode, T toNode) {
 template <class T> void Graph<T>::Print() {
   for (size_t i = 0; i < adjacencyList_.size(); ++i) {
     std::cout << adjacencyList_[i]->Get() << ": ";
-    adjacencyList_[i]->PrintConnections();
+    adjacencyList_[i]->Print();
   }
+}
+
+template <class T> void Graph<T>::ResetColor(kColor newColor) {
+  for (size_t i = 0; i < adjacencyList_.size(); ++i)
+    adjacencyList_[i]->SetColor(newColor);
 }
 
 template <class T> void Graph<T>::DepthFirstSearch(T startNode,
