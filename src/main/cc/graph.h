@@ -30,6 +30,8 @@ template <class T> class GraphNode {
   kColor ChangeColor(kColor newColor);
   int ResetDepth();
   int GetDepth();
+  kColor GetColor();
+  void DepthFirstSearch(int depth);
  private:
   int SetDepth(int newDepth);
   bool HasConnection(GraphNode<T> * nodePointer);
@@ -91,6 +93,29 @@ template <class T> int GraphNode<T>::GetDepth() {
   return depth_;
 }
 
+template <class T> kColor GraphNode<T>::GetColor() {
+  return color_;
+}
+
+template <class T> void GraphNode<T>::DepthFirstSearch(int depth) {
+  std::cout << "[INFO] Visting node " << this->Get() << " (" <<
+      this->GetColor() << ") at found depth " << this->GetDepth() <<
+      " at current depth " << depth << std::endl;
+  switch (this->GetColor()) {
+    case kWhite:
+      this->ChangeColor(kGray);
+      this->SetDepth(depth);
+      for (size_t i = 0; i < connections_.size(); ++i)
+        connections_[i]->DepthFirstSearch(depth + 1);
+      this->ChangeColor(kBlack);
+      break;
+    case kGray:
+    case kBlack:
+      if (this->GetDepth() > depth)
+        this->SetDepth(depth);
+  }
+}
+
 template <class T> int GraphNode<T>::Set(T value) {
   int oldValue = value_;
   value_ = value;
@@ -112,11 +137,12 @@ template <class T> class Graph {
   GraphNode<T> * AddNode(T nodeValue);
   int AddConnection(T fromNode, T toNode);
   void Print();
-  void ResetColor(kColor newColor = kWhite);
 
   // Traversal
-  void DepthFirstSearch(T startNode, std::vector<T> * bfsVector);
+  int DepthFirstSearch(T startNode);
  private:
+  void ResetColor(kColor newColor = kWhite);
+  void ResetDepth();
   GraphNode<T> * SearchForNode(T nodeValue);
 };
 
@@ -156,13 +182,24 @@ template <class T> void Graph<T>::Print() {
 
 template <class T> void Graph<T>::ResetColor(kColor newColor) {
   for (size_t i = 0; i < adjacencyList_.size(); ++i)
-    adjacencyList_[i]->SetColor(newColor);
+    adjacencyList_[i]->ChangeColor(newColor);
 }
 
-template <class T> void Graph<T>::DepthFirstSearch(T startNode,
-                                                   std::vector<T> * bfsVector) {
-  bfsVector->pushBack(startNode);
-  GraphNode<T> * currentNode = this->SearchForNode(startNode);
+template <class T> void Graph<T>::ResetDepth() {
+  for (size_t i = 0; i < adjacencyList_.size(); ++i)
+    adjacencyList_[i]->ResetDepth();
+}
+
+template <class T> int Graph<T>::DepthFirstSearch(T startNode) {
+  std::cout << "[INFO] Running DFS on node with value " << startNode <<
+      std::endl;
+  this->ResetColor();
+  this->ResetDepth();
+  GraphNode<T> * startNodePointer = this->SearchForNode(startNode);
+  if (nullptr)
+    return -1;
+  startNodePointer->DepthFirstSearch(0);
+  return 0;
 }
 
 template <class T> GraphNode<T> * Graph<T>::SearchForNode(T nodeValue) {

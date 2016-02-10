@@ -8,7 +8,11 @@ int main() {
   graph.AddConnection(0, 1);
   graph.AddConnection(0, 2);
   graph.AddConnection(1, 2);
-  graph.AddConnection(2, 0);
+  graph.AddConnection(1, 0);
+
+  graph.Print();
+
+  graph.DepthFirstSearch(1);
 
   graph.Print();
 
