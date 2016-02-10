@@ -17,6 +17,7 @@ template <class T> class Node {
   T Get();
   T Set(T valueNew);
   int AppendChild(T valueChild);
+  unsigned int Aryness();
   size_t NumberOfChildren();
 
   // Traversal Algorithms
@@ -62,13 +63,14 @@ template <class T> T Node<T>::Set(T valueNew) {
 }
 
 template <class T> int Node<T>::AppendChild(T valueChild) {
-  if (children_.size() < aryness_) {
-    children_.push_back(new Node<T>(valueChild));
-  } else {
-    size_t i = 0;
-    while (!children_[i++]->AppendChild(valueChild)) {}
-  }
-  return 1;
+  if (children_.size() >= aryness_)
+    return 1;
+  children_.push_back(new Node<T>(valueChild));
+  return 0;
+}
+
+template <class T> unsigned int Node<T>::Aryness() {
+  return aryness_;
 }
 
 template <class T> void Node<T>::TraversePreOrder(

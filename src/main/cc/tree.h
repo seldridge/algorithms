@@ -39,14 +39,21 @@ template <class T> Tree<T>::~Tree() {
 }
 
 template <class T> void Tree<T>::AddNode(T nodeValue) {
-  if (root_) {
-    root_->AppendChild(nodeValue);
+  std::vector< Node<T> * > levelOrderVector;
+  this->TraverseLevelOrder(&levelOrderVector);
+
+  if (!root_) {
+    root_ = new Node<T>(nodeValue);
     return;
   }
-  std::queue< Node<T> * > queue;
-  queue.push(root_);
 
-  root_ = new Node<T>(nodeValue);
+  for (size_t i = 0; i < levelOrderVector.size(); ++i) {
+    if (levelOrderVector[i]->NumberOfChildren() <
+        levelOrderVector[i]->Aryness()) {
+      levelOrderVector[i]->AppendChild(nodeValue);
+      return;
+    }
+  }
 }
 
 template <class T> void Tree<T>::TraversePreOrder(
