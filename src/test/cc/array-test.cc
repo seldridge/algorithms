@@ -2,7 +2,6 @@
 
 #include "src/main/cc/array.h"
 
-
 bool TestInsertionSort() {
   algorithms::Array<int> a(10000);
   a.Randomize(0, 100);
