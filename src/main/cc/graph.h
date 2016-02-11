@@ -5,7 +5,7 @@
 
 #include <iostream>
 #include <vector>
-#include <unordered_map>
+#include <queue>
 
 namespace algorithms {
 
@@ -14,6 +14,13 @@ typedef enum {
   kGray,
   kBlack
 } kColor;
+
+template <class T> void print_vector(
+    std::vector< T *> * vector) {
+  for (size_t i = 0; i < vector->size(); i++)
+    std::cout << (*vector)[i]->Get() << " ";
+  std::cout << std::endl;
+}
 
 template <class T> class GraphNode {
   T value_;
@@ -31,7 +38,12 @@ template <class T> class GraphNode {
   int ResetDepth();
   int GetDepth();
   kColor GetColor();
-  void DepthFirstSearch(int depth);
+
+  // Traversal
+  void DepthFirstSearch(int depth, std::vector< GraphNode<T> * > * vector);
+  void BreadthFirstSearch(std::vector< GraphNode<T> *> * vector,
+                          std::queue< GraphNode<T> *> * queue);
+
  private:
   int SetDepth(int newDepth);
   bool HasConnection(GraphNode<T> * nodePointer);
@@ -97,22 +109,37 @@ template <class T> kColor GraphNode<T>::GetColor() {
   return color_;
 }
 
-template <class T> void GraphNode<T>::DepthFirstSearch(int depth) {
-  std::cout << "[INFO] Visting node " << this->Get() << " (" <<
-      this->GetColor() << ") at found depth " << this->GetDepth() <<
-      " at current depth " << depth << std::endl;
+template <class T> void GraphNode<T>::DepthFirstSearch(
+    int depth, std::vector< GraphNode<T> * > * dfsVector) {
   switch (this->GetColor()) {
     case kWhite:
+      dfsVector->push_back(this);
       this->ChangeColor(kGray);
       this->SetDepth(depth);
       for (size_t i = 0; i < connections_.size(); ++i)
-        connections_[i]->DepthFirstSearch(depth + 1);
+        connections_[i]->DepthFirstSearch(depth + 1, dfsVector);
       this->ChangeColor(kBlack);
       break;
     case kGray:
     case kBlack:
       if (this->GetDepth() > depth)
         this->SetDepth(depth);
+  }
+}
+
+template <class T> void GraphNode<T>::BreadthFirstSearch(
+    std::vector< GraphNode<T> * > * bfsVector,
+    std::queue< GraphNode<T> * > * bfsQueue) {
+  switch (this->GetColor()) {
+    case kWhite:
+      bfsVector->push_back(this);
+      this->ChangeColor(kGray);
+      for (size_t i = 0; i < connections_.size(); ++i)
+        bfsQueue->push(connections_[i]);
+      break;
+    case kGray:
+    case kBlack:
+      break;
   }
 }
 
@@ -139,7 +166,8 @@ template <class T> class Graph {
   void Print();
 
   // Traversal
-  int DepthFirstSearch(T startNode);
+  int DepthFirstSearch(T startNode, std::vector< GraphNode<T> *> * dfsVector);
+  int BreadthFirstSearch(T startNode, std::vector< GraphNode<T> *> * dfsVector);
  private:
   void ResetColor(kColor newColor = kWhite);
   void ResetDepth();
@@ -190,15 +218,31 @@ template <class T> void Graph<T>::ResetDepth() {
     adjacencyList_[i]->ResetDepth();
 }
 
-template <class T> int Graph<T>::DepthFirstSearch(T startNode) {
-  std::cout << "[INFO] Running DFS on node with value " << startNode <<
-      std::endl;
+template <class T> int Graph<T>::DepthFirstSearch(
+    T startNode, std::vector< GraphNode<T> *> * dfsVector) {
   this->ResetColor();
   this->ResetDepth();
   GraphNode<T> * startNodePointer = this->SearchForNode(startNode);
   if (nullptr)
     return -1;
-  startNodePointer->DepthFirstSearch(0);
+  startNodePointer->DepthFirstSearch(0, dfsVector);
+  return 0;
+}
+
+template <class T> int Graph<T>::BreadthFirstSearch(
+    T startNode, std::vector< GraphNode<T> *> * bfsVector) {
+  GraphNode<T> * startNodePointer = this->SearchForNode(startNode);
+  if (startNodePointer == nullptr)
+    return -1;
+
+  this->ResetColor();
+  std::queue< GraphNode<T> * > queue;
+  queue.push(startNodePointer);
+  while (!queue.empty()) {
+    queue.front()->BreadthFirstSearch(bfsVector, &queue);
+    queue.pop();
+  }
+
   return 0;
 }
 

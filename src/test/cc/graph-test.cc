@@ -12,8 +12,18 @@ int main() {
 
   graph.Print();
 
-  graph.DepthFirstSearch(1);
+  std::vector< algorithms::GraphNode<int> *> searchVector;
+  graph.DepthFirstSearch(1, &searchVector);
 
+  std::cout << "DFS: ";
+  print_vector(&searchVector);
+  graph.Print();
+
+
+  searchVector.clear();
+  graph.BreadthFirstSearch(1, &searchVector);
+  std::cout << "BFS: ";
+  print_vector(&searchVector);
   graph.Print();
 
   return 0;
