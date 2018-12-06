@@ -32,11 +32,11 @@ void linked_list_delete(linked_list * element) {
 
 void linked_list_print(linked_list * list) {
   linked_list * ptr = list->next;
-  printf("0x%08lx: 0x%08lx <- (%4d) -> 0x%08lx\n",
-         (uint64_t) list, (uint64_t) list->prev, list->key, (uint64_t) list->next);
+  printf("0x%8p: 0x%8p <- (%4d) -> 0x%8p\n",
+         list, list->prev, list->key, list->next);
   while (ptr->key != SENTINEL) {
-    printf("0x%08lx: 0x%08lx <- (%4d) -> 0x%08lx\n",
-           (uint64_t) ptr, (uint64_t) ptr->prev, ptr->key, (uint64_t) ptr->next);
+    printf("0x%8p: 0x%8p <- (%4d) -> 0x%8p\n",
+           ptr, ptr->prev, ptr->key, ptr->next);
     ptr = ptr->next;
   }
 }
