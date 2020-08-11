@@ -16,7 +16,7 @@ The following tables show the data structures and algorithms contained within th
 | Deque                      | x |     |
 | Stack                      | x |     |
 | Bloom Filter               |   |     |
-| Tree: Binary               |   | x   |
+| Tree: Binary               | x | x   |
 | Tree: N-ary                |   | x   |
 | Tree: Trie                 |   |     |
 | Tree: Splay                |   |     |
