@@ -36,9 +36,9 @@ The following tables show the data structures and algorithms contained within th
 | Sort: Merge                 | x | x   |
 | Sort: Heap                  | x | x   |
 | Sort: Quick                 | x | x   |
-| Tree: Traversal Postorder   |   | x   |
-| Tree: Traversal Inorder     |   | x   |
-| Tree: Traversal Preorder    |   | x   |
+| Tree: Traversal Postorder   | x | x   |
+| Tree: Traversal Inorder     | x | x   |
+| Tree: Traversal Preorder    | x | x   |
 | Tree: Traversal Layer Order |   | x   |
 | Graph: DFS                  |   |     |
 | Graph: BFS                  |   |     |
