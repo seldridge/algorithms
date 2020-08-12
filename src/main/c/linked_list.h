@@ -23,4 +23,7 @@ void linked_list_print(linked_list * list);
 linked_list * linked_list_search(linked_list * list, uint32_t key);
 void linked_list_delete(linked_list * element);
 
+void linked_list_map(linked_list * list, uint32_t (*function)(uint32_t));
+uint32_t linked_list_fold(linked_list * list, uint32_t acc, uint32_t (*function)(uint32_t, uint32_t));
+
 #endif

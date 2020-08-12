@@ -48,3 +48,16 @@ linked_list * linked_list_search(linked_list * list, uint32_t key) {
   }
   return ptr;
 }
+
+void linked_list_map(linked_list * list, uint32_t (*function)(uint32_t)) {
+  if (list->key == SENTINEL)
+    return;
+  list->key = function(list->key);
+  return linked_list_map(list->next, function);
+}
+
+uint32_t linked_list_fold(linked_list * list, uint32_t acc, uint32_t (*function)(uint32_t, uint32_t)) {
+  if (list->key == SENTINEL)
+    return acc;
+  return linked_list_fold(list->next, function(acc, list->key), function);
+}
